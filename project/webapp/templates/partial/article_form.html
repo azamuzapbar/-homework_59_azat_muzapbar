@@ -1,0 +1,30 @@
+{% csrf_token %}
+
+<div class="form_row">
+    {% if errors.title %}
+    <p class="error">{{ errors.title }}</p>
+    {% endif %}
+    <label for="title">title: </label>
+    <input id='title' name='title' type="text" value="{{ project.title }}">
+</div>
+
+<div class="form_row">
+    <label for="description"> description: </label>
+    <input id="description" name="description" type="text" value="{{ project.description }}">
+</div>
+
+<div class="form_row">
+    <label for="task"> task: </label>
+    <select name="task" id="task">
+        {% for choice in choices %}
+            {% if project.task == choice.0 %}
+                <option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+            {% else %}
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+</div>
+<div class="form_row">
+    <input type="submit" value="{{ button_text }}">
+</div>
